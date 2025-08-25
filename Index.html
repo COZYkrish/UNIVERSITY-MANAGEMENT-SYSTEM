@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>College Event Management</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior:smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    nav {
+      background: rgba(20, 19, 19, 0.7);
+      padding: 15px 0;
+      text-align: center;
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: #ffd700;
+    }
+
+    .hero {
+      height: 100vh;
+      background: url('https://centurionuniv.edu.in/wp-content/uploads/2020/01/info-about-banner.jpg') no-repeat center center/cover;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      position: relative;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-top: 10px;
+    }
+
+    section {
+      padding: 60px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #0056b3;
+    }
+
+    footer {
+      background-color: #3f3333;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    #about {
+      animation: fadeSlideUp 1.5s ease-in-out;
+    }
+
+    #about p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      text-align: justify;
+    }
+    @keyframes fadeSlideUp {
+      0% {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+    }
+
+    #gallery {
+      background: #000;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      padding-top: 100px;
+    }
+
+    #gallery h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #ffd700;
+      animation: fadeSlideDown 1s ease-in-out;
+    }
+
+    .gallery-wrapper {
+      position: relative;
+      width: 90%;
+      max-width: 1000px;
+        background: #111;
+        padding: 40px 20px;
+        margin: 40px auto;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(34, 51, 51, 0.315);
+    }
+
+    .gallery-slider {
+      overflow-x: auto;
+      display: flex;
+      gap: 20px;
+      scroll-snap-type: x mandatory;
+      padding: 10px;
+      scroll-behavior: smooth;
+    }
+
+    .gallery-slider::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .gallery-slider::-webkit-scrollbar-thumb {
+      background: #e94040;
+      border-radius: 10px;
+    }
+
+    .gallery-slider img {
+      width: 100%;
+      height: 500px;
+      max-width: 700px;
+      object-fit: cover;
+      border-radius: 10px;
+      scroll-snap-align: center;
+      transition: transform 0.3s;
+    }
+    .gallery-slider img:hover {
+      transform: scale(1.05);
+    }
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2rem;
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      padding: 10px;
+      cursor: pointer;
+      user-select: none;
+      z-index: 2;
+    }
+
+    .arrow.left {
+      left: 0;
+    }
+
+    .arrow.right {
+      right: 0;
+    }
+
+    @keyframes fadeSlideDown {
+      0% {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .upcoming-section {
+    background: #111;
+    color: #0ff;
+    padding: 60px 20px;
+    text-align: center;
+    }
+
+    .upcoming-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #00ffea;
+    }
+
+    .event-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    transition: transform 0.3s;
+    }
+
+    .event-card {
+    background: #222;
+    padding: 20px;
+    border-radius: 15px;
+    width: 300px;
+    box-shadow: 0 0 15px rgba(85, 99, 99, 0.2);
+    color: #fff;
+    transition: transform 0.3s;
+    }
+
+    .event-card h3 {
+    color: #ffd700;
+    margin-bottom: 10px;
+    }
+
+    .event-card p {
+    margin: 8px 0;
+    }
+    .event-card:hover {
+    transform: scale(1.05);
+
+    }
+
+    .contact-section {
+    background: rgb(113, 111, 111);
+    padding: 60px 20px;
+    border-radius: 20px;
+    max-width: 800px;
+    margin: 40px auto;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(0, 255, 204, 0.2);
+    }
+    .contact-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #00ffea;
+    }
+    .contact-section p {
+    color: var(--text-light);
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+    }
+    .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    }
+    .contact-form input,
+    .contact-form textarea {
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    background: #111;
+    color: #0ff;
+    font-size: 1rem;
+    }
+    .contact-form textarea {
+    min-height: 150px;
+    resize: vertical;
+    }
+    .contact-form button {
+    background: #00ffea;
+    color: #000;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background 0.3s;
+    }
+    .contact-form button:hover {
+    background: #0ff;
+    }
+    .contact-info {
+    background: #0a0a0a;
+    padding: 80px 20px;
+    color: #00ffee;
+    text-align: center;
+    animation: fadeSlideUp 1.5s ease-in-out;
+    }
+
+    .contact-info h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #00ffea;
+    }
+    .contact-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    }
+
+    .contact-box {
+    background: #111;
+    padding: 25px 40px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+    width: 300px;
+    transition: transform 0.3s;
+    }
+
+    .contact-box:hover {
+    transform: scale(1.05);
+    }
+
+    .contact-box h3 {
+    margin-bottom: 15px;
+    color: #ffd700;
+    font-size: 1.4rem;
+    }
+
+    .contact-box p {
+    font-size: 1.1rem;
+    color: #fff;
+    }
+
+    .social-icons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    }
+
+    .social-link {
+    color: #0ff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+    }
+
+    .social-link:hover {
+    color: #ff0055;
+    }
+
+    .footer {
+    background-color: #000;
+    color: #ccc;
+    text-align: center;
+    padding: 30px 20px;
+    font-size: 1rem;
+    border-top: 1px solid #222;
+    animation: fadeSlideUp 1.5s ease-in-out;
+    }
+
+   .clean-image {
+      width: 300px;
+      height: auto;
+      /* filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3)); */
+    } 
+
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#upcoming">Upcoming Event</a>
+    <a href="#registration">Event Registration</a>
+    <a href="#contact">Contact us</a>
+  </nav>
+
+  <div class="hero" id="home">
+    <img src="logo1-removebg-preview.png" alt="Logo" class="clean-image">
+    <h1>College Event Management</h1>
+    <p>Organize and explore amazing campus events</p>
+  </div>
+
+  <section id="about">
+    <h2>About</h2>
+    <p>
+      Our college event management platform is dedicated to organizing, promoting, and executing a wide range of campus activities that foster community, creativity, and leadership. From high-energy cultural nights and tech fests to exciting sports tournaments and talent shows, we aim to bring students together in a collaborative and vibrant atmosphere. 
+      <br><br>
+      We work hand-in-hand with student committees and faculty advisors to ensure each event is engaging, well-managed, and inclusive. Whether you’re looking to participate, volunteer, or simply enjoy the events, our platform makes it easy to stay connected with everything happening around campus.
+    </p>
+  </section>
+
+ <section id="gallery">
+  <h2>Gallery</h2>
+
+  <div class="gallery-wrapper">
+    <h3>CULMINANCE</h3>
+    <div class="arrow left" onclick="this.nextElementSibling.scrollLeft -= 700;">&#10094;</div>
+    <div class="gallery-slider">
+      <img src="CULMINANCE/13.jpg" alt="Cultural Night 1" />
+      <img src="CULMINANCE/14.jpg" alt="Cultural Night 2" />
+      <img src="CULMINANCE/12.jpg" alt="Cultural Night 3" />
+    </div>
+    <div class="arrow right" onclick="this.previousElementSibling.scrollLeft += 700;">&#10095;</div>
+  </div>
+
+  <div class="gallery-wrapper">
+    <h3>TECHFEST</h3>
+    <div class="arrow left" onclick="this.nextElementSibling.scrollLeft -= 700;">&#10094;</div>
+    <div class="gallery-slider">
+      <img src="TECHFEAST/1.jpg" alt="Techfest 1" />
+      <img src="TECHFEAST/2.jpg" alt="Techfest 2" />
+      <img src="TECHFEAST/3.jpg" alt="Techfest 3" />
+    </div>
+    <div class="arrow right" onclick="this.previousElementSibling.scrollLeft += 700;">&#10095;</div>
+  </div>
+
+  <div class="gallery-wrapper">
+    <h3>GAJAJYOTI</h3>
+    <div class="arrow left" onclick="this.nextElementSibling.scrollLeft -= 700;">&#10094;</div>
+    <div class="gallery-slider">
+      <img src="GAJAJYOTI/1.jpg" alt="Gajajyoti 1" />
+      <img src="GAJAJYOTI/2.jpg" alt="Gajajyoti 2" />
+      <img src="GAJAJYOTI/3.jpg" alt="Gajajyoti 3" />
+      <img src="GAJAJYOTI/4.jpg" alt="Gajajyoti 3" />
+    </div>
+    <div class="arrow right" onclick="this.previousElementSibling.scrollLeft += 700;">&#10095;</div>
+  </div>
+</section>
+<br><br><br>
+<section id="upcoming" class="upcoming-section">
+  <h2>📅 Upcoming Events</h2>
+  <div class="event-cards">
+    <div class="event-card">
+      <h3>TechFest 2025</h3>
+      <p><strong>Date:</strong> May 20, 2025</p>
+      <p>Join us for coding competitions, tech exhibitions, and interactive workshops!</p>
+    </div>
+    <div class="event-card">
+      <h3>Culminance Night</h3>
+      <p><strong>Date:</strong> June 10, 2025</p>
+      <p>A night full of music, dance, drama, and cultural celebration!</p>
+    </div>
+
+    <div class="event-card">
+      <h3>Gajajyoti</h3>
+      <p><strong>Date:</strong> July 5, 2025</p>
+      <p>Experience the spirit of competition in our annual sports fest!</p>
+    </div>
+  </div>
+</section>
+<section id="registration" class="contact-section">
+  <h2>📝 Event Registration</h2>
+  <p>Fill out the form below to register for your favorite events!</p>
+  <form class="contact-form">
+    <input type="text" placeholder="Your Name" required>
+    <input type="email" placeholder="Your Email" required>
+    <input type="text" placeholder="Event Name (e.g. TechFest, Culminance)" required>
+    <textarea placeholder="Additional Message (optional)"></textarea>
+    <button type="submit">Register</button>
+  </form>
+</section>
+<section id="contact" class="contact-section">
+    <h2>📬 Contact Us</h2>
+    <p>Have questions or suggestions? Feel free to reach out!</p>
+    <form class="contact-form">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+<section id="contact" class="contact-info">
+  <h2>📞 Get in Touch</h2>
+  <div class="contact-details">
+
+    <div class="contact-box">
+      <h3>Email</h3>
+      <p>krishsharma292005@gmail.com</p>
+    </div>
+
+    <div class="contact-box">
+      <h3>Phone</h3>
+      <p>+91 6372658336</p>
+    </div>
+
+    <div class="contact-box">
+      <h3>Follow Us</h3>
+      <div class="social-icons">
+        <a href="#" class="social-link linkedin" target="_blank">LinkedIn</a>
+        <a href="#" class="social-link github" target="_blank">GitHub</a>
+        <a href="#" class="social-link twitter" target="_blank">Twitter</a>
+        <a href="#" class="social-link instagram" target="_blank">Instagram</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+<br><br><br>
+<footer class="footer">
+  <p>2025 College Event Management. All rights reserved.</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Clothing Store</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+      background-image: url('https://img.lovepik.com/photo/60179/7576.jpg_wh860.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    h1 {
+      color: #6deeee;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    }
+
+    .store {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .product {
+      background-color: rgba(255, 255, 255, 0.92);
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      width: 200px;
+    }
+
+    .product img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    .product h3 {
+      margin: 10px 0 5px;
+    }
+
+    .product p {
+      margin: 0 0 10px;
+    }
+
+    button {
+      padding: 8px 12px;
+      background-color: #27ae60;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #cart {
+      margin-top: 40px;
+      text-align: left;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    #cart ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    #cart ul li {
+      margin-bottom: 5px;
+    }
+
+    #total {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>👕 Pallsme Clothing Store </h1>
+
+  <div class="store">
+    <div class="product">
+      <img src="https://images.bestsellerclothing.in/data/vero-moda/11-jan-2023/289623301_g0.jpg?width=1080&height=1355&mode=fill&fill=blur&format=auto&dpr=1.2" alt="T-Shirt">
+      <h3>T-Shirt</h3>
+      <p>&#8377;2500</p>
+      <button onclick="addToCart('T-Shirt', 2500)">Add to Cart</button>
+    </div>
+    <div class="product">
+      <img src="https://img.tatacliq.com/images/i15//437Wx649H/MP000000020390082_437Wx649H_202312082305191.jpeg" alt="Jeans">
+      <h3>Jeans</h3>
+      <p>&#8377;4000</p>
+      <button onclick="addToCart('Jeans', 4000)">Add to Cart</button>
+    </div>
+    <div class="product">
+      <img src="https://resources.mandmdirect.com/Images/_default/v/l/3/vl30186_3_cloudzoom.jpg" alt="Jacket">
+      <h3>Jacket</h3>
+      <p>&#8377;5000</p>
+      <button onclick="addToCart('Jacket', 5000)">Add to Cart</button>
+    </div>
+    <div class="product">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZO_ugwtI_zJH90wfcZuLMUt4pRqTFV-GcdQ&s" alt="Sneakers">
+      <h3>Sneakers</h3>
+      <p>&#8377;10000</p>
+      <button onclick="addToCart('Sneakers', 10000)">Add to Cart</button>
+    </div>
+    <div class="product">
+      <img src="https://i.ebayimg.com/images/g/LY0AAOSwm3hlYeN6/s-l400.jpg" alt="Heels">
+      <h3>Heels</h3>
+      <p>&#8377;15000</p>
+      <button onclick="addToCart('Sneakers', 10000)">Add to Cart</button>
+    </div>
+  </div>
+  
+  <div id="cart">
+    <h2>🛒 Shopping Cart</h2>
+    <ul id="cartItems"></ul>
+    <p id="total">Total: &#8377;0</p>
+  </div>
+
+  <script>
+    const cart = [];
+    let total = 0;
+  
+    function addToCart(product, price) {
+      cart.push({ product, price });
+      total += price;
+  
+      const cartItems = document.getElementById("cartItems");
+      const li = document.createElement("li");
+      li.textContent = ⁠ ${product} - ₹${price.toLocaleString('en-IN')} ⁠;
+      cartItems.appendChild(li);
+  
+      document.getElementById("total").textContent = ⁠ Total: ₹${total.toLocaleString('en-IN')} ⁠;
+    }
+  </script>
+</body>
+</html>
